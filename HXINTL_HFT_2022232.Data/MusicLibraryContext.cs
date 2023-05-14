@@ -28,7 +28,7 @@ namespace HXINTL_HFT_2022232.Data
         {
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=| DataDirectory |\GQFJHHDbContext.mdf;Integrated Security=True;MultipleActiveResults=True");
+                .UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=""|DataDirectory|\HXINTLDatabase.mdf""; Integrated Security=True; MultipleActiveResultSets=True");
 
         }
 
