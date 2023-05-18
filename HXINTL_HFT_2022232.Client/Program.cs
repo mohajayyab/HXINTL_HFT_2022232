@@ -23,6 +23,9 @@ namespace HXINTL_HFT_2022232.Client
             AlbumLogic albumLogic = new AlbumLogic(albumRepo);
             ArtistLogic artistLogic = new ArtistLogic(artistRepo);
 
+
+
+            
         }
     }
 }
