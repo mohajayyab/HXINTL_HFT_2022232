@@ -8,7 +8,7 @@ using HXINTL_HFT_2022232.Data;
 
 namespace HXINTL_HFT_2022232.Repository
 {
-    class AlbumRepository : IAlbumRepository
+    public class AlbumRepository : IAlbumRepository
     {
         protected readonly MusicLibraryContext db;
         public AlbumRepository(MusicLibraryContext db)

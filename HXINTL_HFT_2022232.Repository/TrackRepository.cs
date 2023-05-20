@@ -8,7 +8,7 @@ using HXINTL_HFT_2022232.Data;
 
 namespace HXINTL_HFT_2022232.Repository
 {
-     class TrackRepository : ITrackRepository
+    public  class TrackRepository : ITrackRepository
     {
         MusicLibraryContext db;
         public TrackRepository(MusicLibraryContext db)

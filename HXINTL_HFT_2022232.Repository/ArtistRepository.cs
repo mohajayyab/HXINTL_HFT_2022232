@@ -8,7 +8,7 @@ using HXINTL_HFT_2022232.Models;
 
 namespace HXINTL_HFT_2022232.Repository
 {
-     class ArtistRepository : IArtistRepository
+     public class ArtistRepository : IArtistRepository
     {
         protected readonly MusicLibraryContext db;
         public ArtistRepository(MusicLibraryContext db)
