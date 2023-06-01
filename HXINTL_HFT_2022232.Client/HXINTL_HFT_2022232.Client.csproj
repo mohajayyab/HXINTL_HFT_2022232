@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HXINTL_HFT_2022232.Models\HXINTL_HFT_2022232.Models.csproj" />
-	  <ProjectReference Include="..\HXINTL_HFT_2022232.Data\HXINTL_HFT_2022232.Data.csproj" />
 	  <ProjectReference Include="..\HXINTL_HFT_2022232.Logic\HXINTL_HFT_2022232.Logic.csproj" />
 	  <ProjectReference Include="..\HXINTL_HFT_2022232.Repository\HXINTL_HFT_2022232.Repository.csproj" />
   </ItemGroup>
