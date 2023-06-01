@@ -1,5 +1,5 @@
 ﻿using ConsoleTools;
-using HXINTL_HFT_2022232.Data;
+
 using HXINTL_HFT_2022232.Logic;
 using HXINTL_HFT_2022232.Models;
 using HXINTL_HFT_2022232.Repository;
@@ -13,428 +13,345 @@ namespace HXINTL_HFT_2022232.Client
 {
     class Program
     {
+        
+        public static RestService rserv = new RestService("http://localhost:13104");
         static void Main(string[] args)
         {
-            MusicLibraryContext mlc = new MusicLibraryContext();
-            AlbumRepository albumRepo = new AlbumRepository(mlc);
-            TrackRepository trackRepo = new TrackRepository(mlc);
-            ArtistRepository artistRepo = new ArtistRepository(mlc);
-            IMotorcycleLogic trackLogic = new IMotorcycleLogic(trackRepo);
-            AlbumLogic albumLogic = new AlbumLogic(albumRepo);
-            ArtistLogic artistLogic = new ArtistLogic(artistRepo);
-
-            var subMenuCreate = new ConsoleMenu()
-                 .Add(">>ADD A NEW TRACK", () => AddNewTrack(trackLogic))
-                 .Add(">> CREATE A NEW Album", () => AddNewAlbum(albumLogic))
-                 .Add(">> ADD A NEW Artist TO the music", () => AddNewArtist(artistLogic))
-                 .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-                 .Configure(config =>
-                 {
-                     config.Selector = "--> ";
-                     config.SelectedItemBackgroundColor = ConsoleColor.Green;
-                 });
-            //
-            var subMenuList = new ConsoleMenu()
-                .Add(">> LIST ALL Tracks", () => ListAllTracks(trackLogic))
-                .Add(">> LIST ALL ALBums", () => ListAllAlbum(albumLogic))
-                .Add(">> LIST ALL ARTIST", () => ListAllArtist(artistLogic))
-
-                .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-                .Configure(config =>
-                {
-                    config.Selector = "--> ";
-                    config.SelectedItemBackgroundColor = ConsoleColor.Green;
-                });
-            var subMenuGetBy = new ConsoleMenu()
-               .Add(">> GET ONE TRACK BY ID", () => GetOneTrack(trackLogic))
-               .Add(">> GET ONE ALBUM BY ID", () => GetOneAlbum(albumLogic))
-               .Add(">> GET ONE ARTIST BY ID", () => GetOneArtist(artistLogic))
-               .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-               .Configure(config =>
-               {
-                   config.Selector = "--> ";
-                   config.SelectedItemBackgroundColor = ConsoleColor.DarkYellow;
-               });
-
-            var subMenuListRead = new ConsoleMenu()
-               .Add(">> LIST ALL", () => subMenuList.Show())
-               .Add(">> GET BY ID", () => subMenuGetBy.Show())
-               .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-               .Configure(config =>
-               {
-                   config.Selector = "--> ";
-                   config.SelectedItemBackgroundColor = ConsoleColor.Green;
-               });
-            var subMenuNonCrud = new ConsoleMenu()
-               .Add(">> Q1 - LIST THE LONGEST TRACK", () => GetTheLongestTrack(trackLogic))
-               //.Add(">> Q2 - LIST CLOWNS' EARNINGS AND NUMBER OF GIGS", () => ClownEarnings(companyLogic))
-               //.Add(">> Q3 - LIST CUSTOMERS WHO DID NOT SEE THE RECOMMENDED AGE GAP", () => NotRecommendedAge(companyLogic))
-               //.Add(">> Q4 - LIST CUSTOMERS' TOTAL SPENDINGS - ASYNC VERSION", () => AsyncOrderPrice(companyLogic))
-               //.Add(">> Q5 - LIST CLOWNS' EARNINGS AND NUMBER OF GIGS - ASYNC VERSION", () => AsyncClownEarnings(companyLogic))
-               //.Add(">> Q6 - LIST CUSTOMERS WHO DID NOT SEE THE RECOMMENDED AGE GAP - ASYNC VERSION", () => AsyncNotRecommendedAge(companyLogic))
-               .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-               .Configure(config =>
-               {
-                   config.Selector = "--> ";
-                   config.SelectedItemBackgroundColor = ConsoleColor.DarkYellow;
-               });
-
-            var subMenuUpdate = new ConsoleMenu()
-               .Add(">> CHANGE TRACK ID", () => ChangeTrackId(trackLogic))
-               .Add(">> CHANGE ALBUM ID", () => ChangeAlbumID(albumLogic))
-               .Add(">> CHANGE ARTIST ID", () => ChangeArtistID(artistLogic))
-               .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-               .Configure(config =>
-               {
-                   config.Selector = "--> ";
-                   config.SelectedItemBackgroundColor = ConsoleColor.Green;
-               });
-
-            var subMenuDelete = new ConsoleMenu()
-                .Add(">> DELETE Track", () => DeleteTrack(trackLogic))
-                .Add(">> DELETE Album", () => DeleteAlbum(albumLogic))
-                .Add(">> DELETE Artist", () => DeleteArtist(artistLogic))
-                .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-                .Configure(config =>
-                {
-                    config.Selector = "--> ";
-                    config.SelectedItemBackgroundColor = ConsoleColor.Green;
-                });
-            var subMenuMusic = new ConsoleMenu()
-            .Add(">> C - CREATE", () => subMenuCreate.Show())
-            .Add(">> R - READ", () => subMenuListRead.Show())
-            .Add(">> U - UPDATE", () => subMenuUpdate.Show())
-            .Add(">> D - DELETE", () => subMenuDelete.Show())
-            .Add(">> NON-CRUD - QUERIES", () => subMenuNonCrud.Show())
-            .Add(">> GO BACK TO MENU", ConsoleMenu.Close)
-            .Configure(config =>
-            {
-                config.Selector = "--> ";
-                config.SelectedItemBackgroundColor = ConsoleColor.DarkYellow;
-            });
-
+            System.Threading.Thread.Sleep(8000);
 
 
             var menu = new ConsoleMenu()
-              .Add(">> ENTER AS A VISITOR ", () => subMenuMusic.Show())
-
-              .Add(">> EXIT", ConsoleMenu.Close)
-              .Configure(config =>
-              {
-                  config.Selector = "--> ";
-                  config.SelectedItemBackgroundColor = ConsoleColor.Cyan;
-              });
-
+               .Add("CRUD methods", () => CrudMenu())
+               .Add("non-CRUD methods", () => NonCrudMenu())
+               .Add("Exit", ConsoleMenu.Close);
             menu.Show();
-
-
         }
-        private static void AddNewTrack(IMotorcycleLogic tracklogic)
-        {
-            try
-            {
-                Console.WriteLine("\n:: CREATING A NEW Track ::\n");
-                Console.WriteLine("TYPE THE TrackId!");
-                int TrackId = int.Parse(Console.ReadLine());
-                Track TG = tracklogic.GetTrack(TrackId);
-                Console.WriteLine("\n :: ADDED ::\n");
-                Console.WriteLine(TG.ToString());
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
 
+        private static void CrudMenu()
+        {
+
+            var menu = new ConsoleMenu()
+                .Add("Create element", CreatePreMenu)
+                .Add("Get one element", ReadPreMenu)
+                .Add("Get all element", ReadAllPreMenu)
+                .Add("Update element", UpdatePreMenu)
+                .Add("Delete element", DeletePreMenu)
+                .Add("Exit", ConsoleMenu.Close);
+            menu.Show();
+        }
+        private static void NonCrudMenu()
+        {
+            var menu = new ConsoleMenu()
+               .Add("Get RentMotor at the BMW Brand", GetRentMotorcycleAtBMWBrand)
+               .Add("Get RentMotor where the Motor price is over 4K$", GetRentMotorcycleWhereMotorPriceIsOver4)
+               .Add("Get RentMotor where the Motor name is BMW Motorcycle1", GetRentMotorcycleWhereMotorModelNameIsBMWMotorcycle1)
+               .Add("Get Brands where remters name is Sanya", GetBrandWithSanya)
+               .Add("Get Brands where renter is male", GetBrandWhereGenderIsMale)
+               .Add("Exit", ConsoleMenu.Close);
+            menu.Show();
+        }
+
+        private static void PreMenu(Action RentMotor, Action Motor, Action Brand)
+        {
+            var menu = new ConsoleMenu()
+                .Add("RentMotor", RentMotor)
+                .Add("Motor", Motor)
+                .Add("Brand", Brand)
+                .Add("Exit", ConsoleMenu.Close);
+            menu.Show();
+        }
+        //-------------------------------------------------------------------------------------------------------------CRUD------------------------------------------------
+
+        //---------------------Create-------------------------
+        private static void CreatePreMenu()
+        {
+            PreMenu(CreateRentMotor, CreateMotor, CreateBrand);
+        }
+
+        private static void CreateBrand()
+        {
+            Console.WriteLine("BrandName: ");
+            string brandname = Console.ReadLine();
+            Console.WriteLine("Age:");
+            int brandyear = int.Parse(Console.ReadLine());
+            rserv.Post<Brand>(new Brand() { BrandName = brandname, BrandYear = brandyear }, "Brand");
+        }
+
+        private static void CreateMotor()
+        {
+            Console.WriteLine("Name: ");
+            string motorcyclename = Console.ReadLine();
+            Console.WriteLine("Type:");
+            string motorcycletype = Console.ReadLine();
+            Console.WriteLine("Brand id: ");
+            int brandid = int.Parse(Console.ReadLine());
+            rserv.Post<Motorcycle>(new Motorcycle() { MotorcycleName = motorcyclename , MotorcycleType = motorcycletype, Brand_id = brandid }, "Motorcycle");
+        }
+
+        private static void CreateRentMotor()
+        {
+            Console.WriteLine("Name: ");
+            string buyername = Console.ReadLine();
+            Console.WriteLine("Role name:");
+            string buyergender = Console.ReadLine();
+            Console.WriteLine("Motor id: ");
+            int motorcycleid = int.Parse(Console.ReadLine());
+            rserv.Post<RentMotorcycle>(new RentMotorcycle() { BuyerName = buyername, BuyerGender = buyergender, Motorcycle_id = motorcycleid }, "RentMotorcycle");
+        }
+
+        //---------------------END-Create-------------------
+
+
+
+
+
+        //---------------------Read------------------------
+        private static void ReadPreMenu()
+        {
+            PreMenu(ReadRentMotor, ReadMotor, ReadBrand);
+        }
+
+        private static void ReadBrand()
+        {
+            Console.WriteLine("Search for desired with an Id of: ");
+            int id = int.Parse(Console.ReadLine());
+            var getBrand = rserv.Get<Brand>(id, "Brand");
+            Console.WriteLine($"Id: {getBrand.Id}, BrandName: {getBrand.BrandName}, BrandYear: {getBrand.BrandYear}");
             Console.ReadLine();
-        }
-        private static void AddNewAlbum(AlbumLogic albumlogic)
-        {
-            try
-            {
-                Console.WriteLine("\n:: CREATING A NEW Album ::\n");
-                Console.WriteLine("TYPE THE AlbumId!");
-                int albumID = int.Parse(Console.ReadLine());
-                Beand TG = albumlogic.GetAlbum(albumID);
-                Console.WriteLine("\n :: ADDED ::\n");
-                Console.WriteLine(TG.ToString());
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void AddNewArtist(ArtistLogic artistlogic)
-        {
-            try
-            {
-                Console.WriteLine("\n:: CREATING A NEW Artist ::\n");
-                Console.WriteLine("TYPE THE ArtistId!");
-                int ArtistId = int.Parse(Console.ReadLine());
-                Artist TG = artistlogic.GetArtist(ArtistId);
-                Console.WriteLine("\n :: ADDED ::\n");
-                Console.WriteLine(TG.ToString());
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void ListAllTracks(IMotorcycleLogic trackLogic)
-        {
-            Console.WriteLine("\n:: ALL Tracks ::\n");
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-            Console.ResetColor();
-            trackLogic.GetTracks().ToList().ForEach(x => Console.WriteLine(x.ToString()));
-            Console.ReadLine();
-        }
-        private static void ListAllArtist(ArtistLogic artistLogic)
-        {
-            Console.WriteLine("\n:: ALL Artist ::\n");
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-            Console.ResetColor();
-            artistLogic.GetArtists().ToList().ForEach(x => Console.WriteLine(x.ToString()));
-            Console.ReadLine();
-        }
-        private static void ListAllAlbum(AlbumLogic albumLogic)
-        {
-            Console.WriteLine("\n:: ALL Album ::\n");
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-            Console.ResetColor();
-            albumLogic.GetAlbums().ToList().ForEach(x => Console.WriteLine(x.ToString()));
-            Console.ReadLine();
-        }
-        private static void GetOneTrack(IMotorcycleLogic trackLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE TRACK YOU WANT TO SEE ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.ResetColor();
-                Console.WriteLine(trackLogic.GetTrack(id).ToString());
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void GetOneAlbum(AlbumLogic albumLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE ALBUM YOU WANT TO SEE ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.ResetColor();
-                Console.WriteLine(albumLogic.GetAlbum(id).ToString());
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void GetOneArtist(ArtistLogic artistLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE ARTIST YOU WANT TO SEE ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.ResetColor();
-                Console.WriteLine(artistLogic.GetArtist(id).ToString());
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void GetTheoldestArtist(ArtistLogic artistLogic)
-        {
-            Console.WriteLine("\n:: I WILL GIVE YOU Oldest Artist::\n");
-            var item = artistLogic.GetTheOldestArtist();
 
         }
-        private static void DeleteTrack(IMotorcycleLogic trackLogic)
+
+        private static void ReadMotor()
         {
-            Console.WriteLine("\n:: TYPE THE ID OF THE TRACK TO DELETE THE RECORD ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.WriteLine("\n :: YOU ARE DELETING " + trackLogic.GetTrack(id).TrackId + " ::");
-                trackLogic.DeleteTrack(id);
-                Console.WriteLine("\n :: UPDATING... ::\n");
-                Console.WriteLine("\n :: DELETED ::\n");
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void DeleteAlbum(AlbumLogic albumLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE ALBUM TO DELETE THE RECORD ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.WriteLine("\n :: YOU ARE DELETING " + albumLogic.GetAlbum(id).AlbumID + " ::");
-                albumLogic.DeleteAlbum(id);
-                Console.WriteLine("\n :: UPDATING... ::\n");
-                Console.WriteLine("\n :: DELETED ::\n");
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void DeleteArtist(ArtistLogic artistLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE ARTIST TO DELETE THE RECORD ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.WriteLine("\n :: YOU ARE DELETING " + artistLogic.GetArtist(id).ArtistId + " ::");
-                artistLogic.DeleteArtist(id);
-                Console.WriteLine("\n :: UPDATING... ::\n");
-                Console.WriteLine("\n :: DELETED ::\n");
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void ChangeTrackId(IMotorcycleLogic trackLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE TRACK TO UPDATE ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.WriteLine("CURRENT TRACK: " + trackLogic.GetTrack(id).TrackId);
-                Console.WriteLine("\n :: TYPE THE NEW TRACK ID! ::");
-                string trackid = Console.ReadLine();
-                Console.WriteLine("\n :: TYPE THE NEW TRACK! ::");
-                Console.WriteLine("\n :: UPDATING... ::\n");
-                Console.WriteLine("NEW TRACK: " + trackLogic.GetTrack(id).TrackId);
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void ChangeAlbumID(AlbumLogic albumLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE Album TO UPDATE ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.WriteLine("CURRENT TTRACK: " + albumLogic.GetAlbum(id).AlbumID);
-                Console.WriteLine("\n :: TYPE THE NEW Album ID! ::");
-                string trackid = Console.ReadLine();
-                Console.WriteLine("\n :: TYPE THE NEW ALBUM! ::");
-                Console.WriteLine("\n :: UPDATING... ::\n");
-                Console.WriteLine("NEW ALBUM: " + albumLogic.GetAlbum(id).AlbumID);
-
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.ReadLine();
-        }
-        private static void ChangeArtistID(ArtistLogic artistLogic)
-        {
-            Console.WriteLine("\n:: TYPE THE ID OF THE Artist TO UPDATE ::\n");
-            try
-            {
-                int id = int.Parse(Console.ReadLine());
-                Console.WriteLine("CURRENT TTRACK: " + artistLogic.GetArtist(id).ArtistId);
-                Console.WriteLine("\n :: TYPE THE NEW Artist ID! ::");
-                string trackid = Console.ReadLine();
-                Console.WriteLine("\n :: TYPE THE NEW Artist! ::");
-                Console.WriteLine("\n :: UPDATING... ::\n");
-                Console.WriteLine("NEW ARTIST: " + artistLogic.GetArtist(id).ArtistId);
-
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
+            Console.WriteLine("Search for desired with an Id of: ");
+            int id = int.Parse(Console.ReadLine());
+            var getMotor = rserv.Get<Motorcycle>(id, "Motorcycle");
+            Console.WriteLine($"Id: {getMotor.Id}, MotorName: {getMotor.MotorcycleName}, MotorType: {getMotor.MotorcycleType}, BrandId: {getMotor.Brand_id}");
             Console.ReadLine();
         }
 
-        private static void GetTheLongestTrack(IMotorcycleLogic trackLogic)
+        private static void ReadRentMotor()
         {
-            Console.WriteLine("! THIS IS THE LONGEST TRACK !");
-            Console.WriteLine("\n:: LISTING THE NUMBER OF GIGS AND THE TOTAL EARNINGS FOR THE CLOWNS ::\n");
-            var item = trackLogic.GetLongestTrack();
-
-            {
-                Console.WriteLine(item);
-            }
-
+            Console.WriteLine("Search for desired with an Id of: ");
+            int id = int.Parse(Console.ReadLine());
+            var getRentMotor = rserv.Get<RentMotorcycle>(id, "RentMotorcycle");
+            Console.WriteLine($"Id: {getRentMotor.Id}, BuyerName: {getRentMotor.BuyerName}, BuyerGender: {getRentMotor.BuyerGender}, MotorId: {getRentMotor.Motorcycle_id}");
             Console.ReadLine();
         }
 
+        //---------------------END-Read-------------------
+
+
+
+
+
+        //----------------------ReadAll----------------------
+        private static void ReadAllPreMenu()
+        {
+            PreMenu(PrintAllRentMotor, PrintAllMotors, PrintAllBrands);
+        }
+
+        private static void PrintAllRentMotor()
+        {
+            var RentMotor = rserv.Get<RentMotorcycle>("RentMotorcycle");
+            Console.WriteLine("-------------RentMotor-------------");
+            RentMotorToConsole(RentMotor);
+            Console.ReadLine();
+        }
+        private static void PrintAllMotors()
+        {
+            var Motors = rserv.Get<Motorcycle>("Motorcycle");
+            Console.WriteLine("-------------Motors-------------");
+            MotorToConsole(Motors);
+            Console.ReadLine();
+        }
+        private static void PrintAllBrands()
+        {
+            var Brands = rserv.Get<Brand>("Brand");
+            Console.WriteLine("-------------Brands-------------");
+            BrandToConsole(Brands);
+            Console.ReadLine();
+        }
+        //---------------END-ReadAll-------------------
+
+
+
+
+
+        //-----------------Update-------------------
+        private static void UpdatePreMenu()
+        {
+            PreMenu(UpdateRentMotor, UpdateMotor, UpdateBrand);
+        }
+
+        private static void UpdateBrand()
+        {
+            Console.WriteLine("Id: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("BrandName: ");
+            string BrandName = Console.ReadLine();
+            Console.WriteLine("BrandYear:");
+            int brandyear = int.Parse(Console.ReadLine());
+            Brand input = new Brand() { Id = id, BrandName = BrandName, BrandYear = brandyear };
+            rserv.Put(input, "Brand");
+        }
+
+        private static void UpdateMotor()
+        {
+            Console.WriteLine("Id: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("MotorName: ");
+            string teamname = Console.ReadLine();
+            Console.WriteLine("MotorType:");
+            string motortype = Console.ReadLine();
+            Console.WriteLine("Brand id: ");
+            int brandid = int.Parse(Console.ReadLine());
+            Motorcycle input = new Motorcycle() { Id = id, MotorcycleName = teamname, MotorcycleType = motortype, Brand_id = brandid };
+            rserv.Put(input, "Motorcycle");
+        }
+
+        private static void UpdateRentMotor()
+        {
+            Console.WriteLine("Id: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("BuyerName: ");
+            string name = Console.ReadLine();
+            Console.WriteLine("BuyDate:");
+            int buydate = int.Parse(Console.ReadLine());
+            Console.WriteLine("Car id: ");
+            int motorid = int.Parse(Console.ReadLine());
+            RentMotorcycle input = new RentMotorcycle() { Id = id, BuyerName = name, BuyDate = buydate, Motorcycle_id = motorid };
+            rserv.Put(input, "RentMotorcycle");
+        }
+
+        //-----------------END-Update-------------
+
+
+
+
+
+        //-----------------Delete--------------
+        private static void DeletePreMenu()
+        {
+            PreMenu(DeleteRentMotor, DeleteMotor, DeleteBrand);
+        }
+
+        private static void DeleteBrand()
+        {
+            Console.WriteLine("Delete element with an Id of: ");
+            int id = int.Parse(Console.ReadLine());
+            rserv.Delete(id, "Brand");
+        }
+
+        private static void DeleteMotor()
+        {
+            Console.WriteLine("Delete element with an Id of: ");
+            int id = int.Parse(Console.ReadLine());
+            rserv.Delete(id, "Motorcycle");
+        }
+
+        private static void DeleteRentMotor()
+        {
+            Console.WriteLine("Delete element with an Id of: ");
+            int id = int.Parse(Console.ReadLine());
+            rserv.Delete(id, "RentMotorcycle");
+        }
+
+        //-------------------END-Delete----------
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ////-------------------------------------------------------------------------------------------------------------non-CRUD------------------------------------------------
+     
+        private static void GetRentMotorcycleAtBMWBrand()
+        {
+            var output = rserv.Get<RentMotorcycle>("stat/GetRentMotorcycleAtBMWBrand");
+
+            RentMotorToConsole(output);
+            Console.ReadLine();
+        }
+        private static void GetRentMotorcycleWhereMotorPriceIsOver4()
+        {
+            var output = rserv.Get<RentMotorcycle>("stat/GetRentMotorcycleWhereMotorPriceIsOver4");
+            RentMotorToConsole(output);
+            Console.ReadLine();
+        }
+
+        private static void GetRentMotorcycleWhereMotorModelNameIsBMWMotorcycle1()
+        {
+            var output = rserv.Get<RentMotorcycle>("stat/GetRentMotorcycleWhereMotorModelNameIsBMWMotorcycle1");
+            RentMotorToConsole(output);
+            Console.ReadLine();
+        }
+        private static void GetRentMotorcycleWhereCarModelNameIsBMWMotorcycle()
+        {
+            var output = rserv.Get<Brand>("stat/GetRentMotorcycleWhereCarModelNameIsBMWMotorcycle");
+            BrandToConsole(output);
+            Console.ReadLine();
+        }
+        private static void GetBrandWithSanya()
+        {
+            var output = rserv.Get<Brand>("stat/GetBrandWithSanya");
+            BrandToConsole(output);
+            Console.ReadLine();
+        }
+
+
+        private static void GetBrandWhereGenderIsMale()
+        {
+            var output = rserv.Get<Brand>("stat/GetBrandWhereGenderIsMale");
+            BrandToConsole(output);
+            Console.ReadLine();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        ////-------------------------------------------------------------------------------------------------------------ToConsole------------------------------------------------
+        private static void RentMotorToConsole(IEnumerable<RentMotorcycle> input)
+        {
+            foreach (var item in input)
+            {
+                Console.WriteLine($"Id: {item.Id}, BuyDate: {item.BuyDate}, BuyerName: {item.BuyerName}, MotorId: {item.Motorcycle_id}");
+            }
+        }
+        private static void MotorToConsole(IEnumerable<Motorcycle> input)
+        {
+            foreach (var item in input)
+            {
+                Console.WriteLine($"Id: {item.Id}, MotorName: {item.MotorcycleName}, MotorType: {item.MotorcycleType}, BrandId: {item.Brand_id}");
+            }
+        }
+        private static void BrandToConsole(IEnumerable<Brand> input)
+        {
+            foreach (var item in input)
+            {
+                Console.WriteLine($"Id: {item.Id}, BrandName: {item.BrandName}, BrandYear: {item.BrandYear}");
+            }
+        }
     }
-}
+            
+
+    }  
+
 
 
             

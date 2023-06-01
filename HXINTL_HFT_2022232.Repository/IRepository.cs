@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace I0ZMN2_HFT_2022231.Repository
+namespace HXINTL_HFT_2022232.Repository
 {
     public interface IRepository<T> where T : class
     {

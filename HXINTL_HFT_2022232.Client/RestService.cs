@@ -8,7 +8,7 @@ using System.Net.Http.Json;
 
 namespace HXINTL_HFT_2022232.Client
 {
-     class RestService
+    class RestService
     {
         HttpClient client;
 
@@ -42,7 +42,6 @@ namespace HXINTL_HFT_2022232.Client
             HttpResponseMessage response = client.GetAsync(endpoint).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)
             {
-
                 items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
             }
             return items;
