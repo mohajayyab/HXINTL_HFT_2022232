@@ -9,8 +9,8 @@ namespace HXINTL_HFT_2022232.Endpoint
 {
     public class TrackController : Controller
     {
-        ITrackLogic t1;
-        public TrackController(ITrackLogic t1)
+        IBrandLogic t1;
+        public TrackController(IBrandLogic t1)
         {
             this.t1 = t1;
 

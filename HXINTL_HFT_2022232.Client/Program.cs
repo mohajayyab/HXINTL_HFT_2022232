@@ -19,7 +19,7 @@ namespace HXINTL_HFT_2022232.Client
             AlbumRepository albumRepo = new AlbumRepository(mlc);
             TrackRepository trackRepo = new TrackRepository(mlc);
             ArtistRepository artistRepo = new ArtistRepository(mlc);
-            TrackLogic trackLogic = new TrackLogic(trackRepo);
+            IMotorcycleLogic trackLogic = new IMotorcycleLogic(trackRepo);
             AlbumLogic albumLogic = new AlbumLogic(albumRepo);
             ArtistLogic artistLogic = new ArtistLogic(artistRepo);
 
@@ -129,7 +129,7 @@ namespace HXINTL_HFT_2022232.Client
 
 
         }
-        private static void AddNewTrack(TrackLogic tracklogic)
+        private static void AddNewTrack(IMotorcycleLogic tracklogic)
         {
             try
             {
@@ -183,7 +183,7 @@ namespace HXINTL_HFT_2022232.Client
 
             Console.ReadLine();
         }
-        private static void ListAllTracks(TrackLogic trackLogic)
+        private static void ListAllTracks(IMotorcycleLogic trackLogic)
         {
             Console.WriteLine("\n:: ALL Tracks ::\n");
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -210,7 +210,7 @@ namespace HXINTL_HFT_2022232.Client
             albumLogic.GetAlbums().ToList().ForEach(x => Console.WriteLine(x.ToString()));
             Console.ReadLine();
         }
-        private static void GetOneTrack(TrackLogic trackLogic)
+        private static void GetOneTrack(IMotorcycleLogic trackLogic)
         {
             Console.WriteLine("\n:: TYPE THE ID OF THE TRACK YOU WANT TO SEE ::\n");
             try
@@ -279,7 +279,7 @@ namespace HXINTL_HFT_2022232.Client
             var item = artistLogic.GetTheOldestArtist();
 
         }
-        private static void DeleteTrack(TrackLogic trackLogic)
+        private static void DeleteTrack(IMotorcycleLogic trackLogic)
         {
             Console.WriteLine("\n:: TYPE THE ID OF THE TRACK TO DELETE THE RECORD ::\n");
             try
@@ -345,7 +345,7 @@ namespace HXINTL_HFT_2022232.Client
 
             Console.ReadLine();
         }
-        private static void ChangeTrackId(TrackLogic trackLogic)
+        private static void ChangeTrackId(IMotorcycleLogic trackLogic)
         {
             Console.WriteLine("\n:: TYPE THE ID OF THE TRACK TO UPDATE ::\n");
             try
@@ -420,7 +420,7 @@ namespace HXINTL_HFT_2022232.Client
             Console.ReadLine();
         }
 
-        private static void GetTheLongestTrack(TrackLogic trackLogic)
+        private static void GetTheLongestTrack(IMotorcycleLogic trackLogic)
         {
             Console.WriteLine("! THIS IS THE LONGEST TRACK !");
             Console.WriteLine("\n:: LISTING THE NUMBER OF GIGS AND THE TOTAL EARNINGS FOR THE CLOWNS ::\n");
