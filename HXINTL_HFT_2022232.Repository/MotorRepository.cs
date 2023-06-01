@@ -1,4 +1,4 @@
-﻿using I0ZMN2_HFT_2022231.Models;
+﻿using HXINTL_HFT_2022232.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,37 +6,37 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I0ZMN2_HFT_2022231.Repository
+namespace HXINTL_HFT_2022232.Repository
 {
-    public class CarRepository : Repository<Car>
+    public class MotorRepository : Repository<Motorcycle>
     {
-        public CarRepository(CarDBContext hpctx) : base(hpctx)
+        public MotorRepository(MotorsDBContext hpdb) : base(hpdb)
         {
         }
-        public override Car Read(int id)
+        public override Motorcycle Read(int id)
         {
             return ReadAll().SingleOrDefault(x => x.Id == id);
         }
-        public override void Update(Car obj)
+        public override void Update(Motorcycle obj)
         {
-            var oldCar = Read(obj.Id);
-            oldCar.Id = obj.Id;
-            oldCar.CarName = obj.CarName;
-            oldCar.CarType = obj.CarType;
-            oldCar.CarPrice = obj.CarPrice;
-            oldCar.CarReleaseYear = obj.CarReleaseYear;
-            oldCar.CarColor = obj.CarColor;
-            oldCar.CarSeatNumber = obj.CarSeatNumber;
-            oldCar.IsLeftWheel = obj.IsLeftWheel;
-            oldCar.FuelType = obj.FuelType;
-            oldCar.IsElectricCar = obj.IsElectricCar;
-            oldCar.Brand_id = obj.Brand_id;
-            ctx.SaveChanges();
+            var oldMotorcycle = Read(obj.Id);
+            oldMotorcycle.Id = obj.Id;
+            oldMotorcycle.MotorcycleName = obj.MotorcycleName;
+            oldMotorcycle.MotorcycleType = obj.MotorcycleType;
+            oldMotorcycle.MotorcyclePrice = obj.MotorcyclePrice;
+            oldMotorcycle.MotorcycleReleaseYear = obj.MotorcycleReleaseYear;
+            oldMotorcycle.MotorcycleColor = obj.MotorcycleColor;
+            oldMotorcycle.MotorcycleSeatNumber = obj.MotorcycleSeatNumber;
+            oldMotorcycle.IsLeftWheel = obj.IsLeftWheel;
+            oldMotorcycle.FuelType = obj.FuelType;
+            oldMotorcycle.IsElectricMotorcycle = obj.IsElectricMotorcycle;
+            oldMotorcycle.Brand_id = obj.Brand_id;
+            db.SaveChanges();
         }
         public override void Delete(int id)
         {
-            ctx.Remove(Read(id));
-            ctx.SaveChanges();
+            db.Remove(Read(id));
+            db.SaveChanges();
         }
     }
 }
