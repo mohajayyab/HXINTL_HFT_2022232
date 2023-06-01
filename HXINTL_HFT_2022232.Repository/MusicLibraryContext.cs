@@ -12,7 +12,7 @@ namespace HXINTL_HFT_2022232.Data
         public MusicLibraryContext()
         {
 
-            this.Database.EnsureCreated();
+            //this.Database.EnsureCreated();
         }
 
         public virtual DbSet<Album> Albums { get; set; }
