@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4a83c2bf-8ee3-4ebd-ab4c-d3834ad576ce": {
+      "ProjectGuid": "4a83c2bf-8ee3-4ebd-ab4c-d3834ad576ce",
+      "DisplayName": "HXINTL_HFT_2022232.Client",
+      "ColorIndex": 0
+    },
+    "2326ae8d-2c61-4c56-968d-255619dce78a": {
+      "ProjectGuid": "2326ae8d-2c61-4c56-968d-255619dce78a",
+      "DisplayName": "HXINTL_HFT_2022232.Models",
+      "ColorIndex": 1
+    },
+    "f4aac98c-5673-471d-a455-e96a04b5a131": {
+      "ProjectGuid": "f4aac98c-5673-471d-a455-e96a04b5a131",
+      "DisplayName": "HXINTL_HFT_2022232.Logic",
+      "ColorIndex": 2
+    },
+    "0a914119-e800-461c-8ad6-94df997e3f87": {
+      "ProjectGuid": "0a914119-e800-461c-8ad6-94df997e3f87",
+      "DisplayName": "HXINTL_HFT_2022232.Repository",
+      "ColorIndex": 3
+    },
+    "41692675-7d24-4823-80db-2d38a1af1d66": {
+      "ProjectGuid": "41692675-7d24-4823-80db-2d38a1af1d66",
+      "DisplayName": "HXINTL_HFT_2022232.Test",
+      "ColorIndex": 4
+    },
+    "d03d386a-a186-43f5-afe9-a921e51d5f07": {
+      "ProjectGuid": "d03d386a-a186-43f5-afe9-a921e51d5f07",
+      "DisplayName": "HXINTL_HFT_2022232.Endpoint",
+      "ColorIndex": 5
+    }
+  },
+  "NextColorIndex": 6
+}
