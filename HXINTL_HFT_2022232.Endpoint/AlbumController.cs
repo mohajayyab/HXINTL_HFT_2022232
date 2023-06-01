@@ -17,28 +17,28 @@ namespace HXINTL_HFT_2022232.Endpoint
 
         }
         [HttpGet]
-        public IEnumerable<Album> Get()
+        public IEnumerable<Beand> Get()
         {
             return a1.GetAlbums();
         }
 
         // GET /brand/5
         [HttpGet("{id}")]
-        public Album Get(int AlbumId)
+        public Beand Get(int AlbumId)
         {
             return a1.GetAlbum(AlbumId);
         }
 
         // POST /brand
         [HttpPost]
-        public void Post([FromBody] Album value)
+        public void Post([FromBody] Beand value)
         {
             a1.CreateAlbum(value.AlbumID, value.Title);
         }
 
         // PUT /brand
         [HttpPut]
-        public void Put([FromBody] Album value)
+        public void Put([FromBody] Beand value)
         {
             a1.UpdateAlbum(value);
         }

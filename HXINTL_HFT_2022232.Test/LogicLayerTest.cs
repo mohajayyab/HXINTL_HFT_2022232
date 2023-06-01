@@ -92,12 +92,12 @@ namespace HXINTL_HFT_2022232.Test
                     Track fakeTrack = new Track();
                     fakeTrack.TrackId = 1;
                     fakeTrack.NamePlace = "ballads";
-                    var albums = new List<Album>()
+                    var albums = new List<Beand>()
                 {
-                    new Album(){
+                    new Beand(){
                         AlbumID = 11, Title = "Title 1 " , TracktID = 1 ,BasePrice =1000
                     },
-                    new Album(){
+                    new Beand(){
                        AlbumID = 22, Title = "Title 2", TracktID = 1,BasePrice=2000
                     }
                 }.AsQueryable();

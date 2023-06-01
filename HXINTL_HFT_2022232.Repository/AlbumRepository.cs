@@ -15,17 +15,17 @@ namespace HXINTL_HFT_2022232.Repository
         {
             this.db = db;
         }
-        public void Create(Album album)
+        public void Create(Beand album)
         {
             db.Albums.Add(album);
             db.SaveChanges();
         }
-        public Album Read(int Albumid)
+        public Beand Read(int Albumid)
         {
             return
                 db.Albums.FirstOrDefault(t => t.AlbumID == Albumid);
         }
-        public IQueryable<Album> GetAll()
+        public IQueryable<Beand> GetAll()
         {
             return db.Albums;
         }
@@ -35,7 +35,7 @@ namespace HXINTL_HFT_2022232.Repository
             db.Albums.Remove(AlbumToDelete);
             db.SaveChanges();
         }
-        public void Update(Album album)
+        public void Update(Beand album)
         {
             var AlbumToUpdate = Read(album.AlbumID);
             AlbumToUpdate.Title = album.Title;

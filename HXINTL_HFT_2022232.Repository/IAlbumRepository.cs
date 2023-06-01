@@ -9,10 +9,10 @@ namespace HXINTL_HFT_2022232.Repository
 {
     public interface IAlbumRepository
     {
-        void Create(Album albumEvent);
+        void Create(Beand albumEvent);
         void Delete(int Albumid);
-        IQueryable<Album> GetAll();
-        Album Read(int Albumid);
-        void Update(Album AlbumEvent);
+        IQueryable<Beand> GetAll();
+        Beand Read(int Albumid);
+        void Update(Beand AlbumEvent);
     }
 }

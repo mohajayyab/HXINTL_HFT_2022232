@@ -15,7 +15,7 @@ namespace HXINTL_HFT_2022232.Data
             //this.Database.EnsureCreated();
         }
 
-        public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<Beand> Albums { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
 
         public virtual DbSet<Artist> Artists { get; set; }
@@ -38,16 +38,16 @@ namespace HXINTL_HFT_2022232.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Album
-            Album a1 = new Album() { AlbumID = 11, Title = "Title 1", BasePrice = 10 };
-            Album a2 = new Album() { AlbumID = 22, Title = "Title 2", BasePrice = 11 };
-            Album a3 = new Album() { AlbumID = 33, Title = "Title 3", BasePrice = 12 };
-            Album a4 = new Album() { AlbumID = 44, Title = "Title 4  ", BasePrice = 13, TracktID = 1 };
-            Album a5 = new Album() { AlbumID = 55, Title = "Title 5  ", BasePrice = 14, TracktID = 1 };
-            Album a6 = new Album() { AlbumID = 66, Title = "Title 6 ", BasePrice = 15, TracktID = 1 };
-            Album a7 = new Album() { AlbumID = 77, Title = "Title 7 ", BasePrice = 16, TracktID = 1 };
-            Album a8 = new Album() { AlbumID = 88, Title = "Title 8 ", BasePrice = 17, TracktID = 1 };
-            Album a9 = new Album() { AlbumID = 99, Title = "Title 9 ", BasePrice = 18, TracktID = 1 };
-            Album a10 = new Album() { AlbumID = 100, Title = "Title 10 ", BasePrice = 19, TracktID = 1 };
+            Beand a1 = new Beand() { AlbumID = 11, Title = "Title 1", BasePrice = 10 };
+            Beand a2 = new Beand() { AlbumID = 22, Title = "Title 2", BasePrice = 11 };
+            Beand a3 = new Beand() { AlbumID = 33, Title = "Title 3", BasePrice = 12 };
+            Beand a4 = new Beand() { AlbumID = 44, Title = "Title 4  ", BasePrice = 13, TracktID = 1 };
+            Beand a5 = new Beand() { AlbumID = 55, Title = "Title 5  ", BasePrice = 14, TracktID = 1 };
+            Beand a6 = new Beand() { AlbumID = 66, Title = "Title 6 ", BasePrice = 15, TracktID = 1 };
+            Beand a7 = new Beand() { AlbumID = 77, Title = "Title 7 ", BasePrice = 16, TracktID = 1 };
+            Beand a8 = new Beand() { AlbumID = 88, Title = "Title 8 ", BasePrice = 17, TracktID = 1 };
+            Beand a9 = new Beand() { AlbumID = 99, Title = "Title 9 ", BasePrice = 18, TracktID = 1 };
+            Beand a10 = new Beand() { AlbumID = 100, Title = "Title 10 ", BasePrice = 19, TracktID = 1 };
             //Track
             Track t1 = new Track() { TrackId = 1, NamePlace = "ballads", Length = 10 };
             Track t2 = new Track() { TrackId = 2, NamePlace = "novelty songs", Length = 15 };
@@ -83,7 +83,7 @@ namespace HXINTL_HFT_2022232.Data
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<Album>(entity =>
+            modelBuilder.Entity<Beand>(entity =>
             {
                 entity.HasOne(album => album.Track)
                     .WithMany(track => track.Albums)
@@ -94,7 +94,7 @@ namespace HXINTL_HFT_2022232.Data
            
 
             modelBuilder.Entity<Track>().HasData(t4, t5, t6);
-            modelBuilder.Entity<Album>().HasData(a1, a2, a3);
+            modelBuilder.Entity<Beand>().HasData(a1, a2, a3);
             modelBuilder.Entity<Artist>().HasData(ar1, ar2, ar3);
         }
 

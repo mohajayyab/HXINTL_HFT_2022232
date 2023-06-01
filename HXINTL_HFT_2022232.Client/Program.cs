@@ -154,7 +154,7 @@ namespace HXINTL_HFT_2022232.Client
                 Console.WriteLine("\n:: CREATING A NEW Album ::\n");
                 Console.WriteLine("TYPE THE AlbumId!");
                 int albumID = int.Parse(Console.ReadLine());
-                Album TG = albumlogic.GetAlbum(albumID);
+                Beand TG = albumlogic.GetAlbum(albumID);
                 Console.WriteLine("\n :: ADDED ::\n");
                 Console.WriteLine(TG.ToString());
             }
