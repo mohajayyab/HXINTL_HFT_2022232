@@ -1,33 +1,33 @@
 {
   "Version": 1,
   "ProjectMap": {
-    "4a83c2bf-8ee3-4ebd-ab4c-d3834ad576ce": {
-      "ProjectGuid": "4a83c2bf-8ee3-4ebd-ab4c-d3834ad576ce",
+    "4b64533d-95a3-4a00-a91b-bedba4ad734e": {
+      "ProjectGuid": "4b64533d-95a3-4a00-a91b-bedba4ad734e",
       "DisplayName": "HXINTL_HFT_2022232.Client",
       "ColorIndex": 0
     },
-    "2326ae8d-2c61-4c56-968d-255619dce78a": {
-      "ProjectGuid": "2326ae8d-2c61-4c56-968d-255619dce78a",
+    "615ba7d5-0bdf-4c6b-8358-97040ba32ca3": {
+      "ProjectGuid": "615ba7d5-0bdf-4c6b-8358-97040ba32ca3",
       "DisplayName": "HXINTL_HFT_2022232.Models",
       "ColorIndex": 1
     },
-    "f4aac98c-5673-471d-a455-e96a04b5a131": {
-      "ProjectGuid": "f4aac98c-5673-471d-a455-e96a04b5a131",
+    "0c543b60-4e13-4b20-bfde-179fb0a1bece": {
+      "ProjectGuid": "0c543b60-4e13-4b20-bfde-179fb0a1bece",
       "DisplayName": "HXINTL_HFT_2022232.Logic",
       "ColorIndex": 2
     },
-    "0a914119-e800-461c-8ad6-94df997e3f87": {
-      "ProjectGuid": "0a914119-e800-461c-8ad6-94df997e3f87",
+    "5861d572-6d73-43db-a2dc-5aef7df86eaa": {
+      "ProjectGuid": "5861d572-6d73-43db-a2dc-5aef7df86eaa",
       "DisplayName": "HXINTL_HFT_2022232.Repository",
       "ColorIndex": 3
     },
-    "41692675-7d24-4823-80db-2d38a1af1d66": {
-      "ProjectGuid": "41692675-7d24-4823-80db-2d38a1af1d66",
+    "44c93c90-587c-4118-b7db-a94a111937c2": {
+      "ProjectGuid": "44c93c90-587c-4118-b7db-a94a111937c2",
       "DisplayName": "HXINTL_HFT_2022232.Test",
       "ColorIndex": 4
     },
-    "d03d386a-a186-43f5-afe9-a921e51d5f07": {
-      "ProjectGuid": "d03d386a-a186-43f5-afe9-a921e51d5f07",
+    "a8429ba1-c143-4790-95ae-be0185ad1c8c": {
+      "ProjectGuid": "a8429ba1-c143-4790-95ae-be0185ad1c8c",
       "DisplayName": "HXINTL_HFT_2022232.Endpoint",
       "ColorIndex": 5
     }
