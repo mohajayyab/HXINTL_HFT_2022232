@@ -43,7 +43,7 @@ namespace HXINTL_HFT_2022232.Logic
         public Track GetTrack(int TrackId)
         {
             Track track = _trackRepository.Read(TrackId);
-            if (track == null)
+            if (track== null)
             {
                 throw new Exception("Not Valid Artist Id ");
             }
