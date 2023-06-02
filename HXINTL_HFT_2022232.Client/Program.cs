@@ -1,5 +1,4 @@
 ﻿using ConsoleTools;
-
 using HXINTL_HFT_2022232.Logic;
 using HXINTL_HFT_2022232.Models;
 using HXINTL_HFT_2022232.Repository;
@@ -14,7 +13,7 @@ namespace HXINTL_HFT_2022232.Client
     class Program
     {
         
-        public static RestService rserv = new RestService("http://localhost:13104");
+        public static RestService rserv = new RestService("http://localhost:21071");
         static void Main(string[] args)
         {
             System.Threading.Thread.Sleep(8000);

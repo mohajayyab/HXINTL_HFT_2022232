@@ -62,7 +62,7 @@ namespace HXINTL_HFT_2022232.Endpoint
                 x.AllowCredentials()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .WithOrigins("http://localhost:13104")
+                .WithOrigins("http://localhost:21071")
             );
 
 
