@@ -26,17 +26,17 @@ namespace HXINTL_HFT_2022232.Endpoint.Controllers
         [HttpGet]
         public IEnumerable<RentMotorcycle> GetRentMotorcycleReposAtBMWBrand()
         {
-            return rentmotorlogic.GetRentMotorcycleReposAtBMWBrand();
+            return rentmotorlogic.GetRentMotorcycleAtBMWBrand();
         }
         [HttpGet]
         public IEnumerable<RentMotorcycle> GetRentMotorcycleRepoWhereMotorPriceIsOver4() 
         {
-            return rentmotorlogic.GetRentMotorcycleRepoWhereMotorPriceIsOver4();
+            return rentmotorlogic.GetRentMotorcycleWhereMotorPriceIsOver4();
         }
         [HttpGet]
         public IEnumerable<RentMotorcycle> GetRentMotorcycleReposWhereMotorModelNameIsBMWMotorcycle1()
         {
-            return rentmotorlogic.GetRentMotorcycleReposWhereMotorModelNameIsBMWMotorcycle1();
+            return rentmotorlogic.GetRentMotorcycleWhereMotorModelNameIsBMWMotorcycle1();
         }
 
         [HttpGet]

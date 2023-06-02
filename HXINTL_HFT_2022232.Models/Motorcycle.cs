@@ -7,35 +7,35 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace I0ZMN2_HFT_2022231.Models
+namespace HXINTL_HFT_2022232.Models
 {
-    public class Car
+    public class Motorcycle
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string CarName { get; set; }
-        public string CarType { get; set; }
-        public int CarPrice { get; set; }
+        public string MotorcycleName { get; set; }
+        public string MotorcycleType { get; set; }
+        public int MotorcyclePrice { get; set; }
         public string NewOrUsed { get; set; }
-        public int CarReleaseYear { get; set; }
-        public string CarColor { get; set; }
-        public int CarSeatNumber { get; set; }
+        public int MotorcycleReleaseYear { get; set; }
+        public string MotorcycleColor { get; set; }
+        public int MotorcycleSeatNumber { get; set; }
         public bool IsLeftWheel { get; set; }
         public string FuelType { get; set; }
-        public bool IsElectricCar { get; set; }
+        public bool IsElectricMotorcycle { get; set; }
         [NotMapped]
         [JsonIgnore]
-        public virtual ICollection<RentCar> RentCars { get; set; }
+        public virtual ICollection<RentMotorcycle> RentMotorcycle { get; set; }
         [NotMapped]
         [JsonIgnore]
         public virtual Brand Brand { get; set; }
         [ForeignKey(nameof (Brand))]
         public int? Brand_id { get; set; }
 
-        public Car()
+        public Motorcycle()
         {
-            RentCars = new HashSet<RentCar>();
+            RentMotorcycle = new HashSet<RentMotorcycle>();
         }
 
     }

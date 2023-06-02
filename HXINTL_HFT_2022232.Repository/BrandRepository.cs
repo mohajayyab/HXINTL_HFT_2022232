@@ -1,15 +1,15 @@
-﻿using I0ZMN2_HFT_2022231.Models;
+﻿using HXINTL_HFT_2022232.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I0ZMN2_HFT_2022231.Repository
+namespace HXINTL_HFT_2022232.Repository
 {
     public class BrandRepository : Repository<Brand>
     {
-        public BrandRepository(CarDBContext ctx) : base(ctx)
+        public BrandRepository(MotorsDBContext db) : base(db)
         {
         }
         public override Brand Read(int id)
@@ -24,12 +24,12 @@ namespace I0ZMN2_HFT_2022231.Repository
             oldBrand.BrandCountry = obj.BrandCountry;
             oldBrand.BrandYear = obj.BrandYear;
 
-            ctx.SaveChanges();
+            db.SaveChanges();
         }
         public override void Delete(int id)
         {
-            ctx.Remove(Read(id));
-            ctx.SaveChanges();
+            db.Remove(Read(id));
+            db.SaveChanges();
         }
     }
 }

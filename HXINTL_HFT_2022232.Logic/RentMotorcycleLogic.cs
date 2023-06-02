@@ -51,7 +51,7 @@ namespace HXINTL_HFT_2022232.Logic
         {
             RentMotorcycleRepo.Update(obj);
         }
-        public IEnumerable<RentMotorcycle> GetRentMotorcycleReposAtBMWBrand()
+        public IEnumerable<RentMotorcycle> GetRentMotorcycleAtBMWBrand()
         {
 
 
@@ -65,7 +65,7 @@ namespace HXINTL_HFT_2022232.Logic
 
             return q.ToList();
         }
-        public IEnumerable<RentMotorcycle> GetRentMotorcycleRepoWhereMotorPriceIsOver4()
+        public IEnumerable<RentMotorcycle> GetRentMotorcycleWhereMotorPriceIsOver4()
         {
             var q = from RentMotorcycle in RentMotorcycleRepo.ReadAll()
                     join Motorcycle in MotorcycleRepo.ReadAll()
@@ -75,7 +75,7 @@ namespace HXINTL_HFT_2022232.Logic
             return q;
         }
 
-        public IEnumerable<RentMotorcycle> GetRentMotorcycleReposWhereMotorModelNameIsBMWMotorcycle1()
+        public IEnumerable<RentMotorcycle> GetRentMotorcycleWhereMotorModelNameIsBMWMotorcycle1()
         {
             var q = from RentMotorcycle in RentMotorcycleRepo.ReadAll()
                     join Motorcycle in MotorcycleRepo.ReadAll()
@@ -85,7 +85,7 @@ namespace HXINTL_HFT_2022232.Logic
             return q;
         }
 
-        public IEnumerable<RentMotorcycle> GetRentMotorcycleReposWhereCarModelNameIsBMWMotorcycle12()
+        public IEnumerable<RentMotorcycle> GetRentMotorcycleWhereCarModelNameIsBMWMotorcycle2()
         {
             var q = from RentMotorcycle in RentMotorcycleRepo.ReadAll()
                     join Motorcycle in MotorcycleRepo.ReadAll()

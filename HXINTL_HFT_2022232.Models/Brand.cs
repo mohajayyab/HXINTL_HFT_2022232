@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I0ZMN2_HFT_2022231.Models
+namespace HXINTL_HFT_2022232.Models
 {
     public class Brand
     {
@@ -21,11 +21,11 @@ namespace I0ZMN2_HFT_2022231.Models
         public int BrandYear { get; set; }
         [NotMapped]
         [JsonIgnore]
-        public virtual ICollection<Motorcycle> Cars { get; set; }
+        public virtual ICollection<Motorcycle> Motorcycle { get; set; }
 
         public Brand()
         {
-            Cars=new HashSet<Motorcycle>();
+            Motorcycle=new HashSet<Motorcycle>();
         }
 
     }

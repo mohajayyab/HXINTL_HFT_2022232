@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DumpExtensions" Version="2.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HXINTL_HFT_2022232.Logic\HXINTL_HFT_2022232.Logic.csproj" />
     <ProjectReference Include="..\HXINTL_HFT_2022232.Models\HXINTL_HFT_2022232.Models.csproj" />
     <ProjectReference Include="..\HXINTL_HFT_2022232.Repository\HXINTL_HFT_2022232.Repository.csproj" />

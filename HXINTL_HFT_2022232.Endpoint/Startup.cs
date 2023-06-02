@@ -44,7 +44,7 @@ namespace HXINTL_HFT_2022232.Endpoint
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HXINTL_HFT_2022232.Endpoint", Version = "v1.0" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HXINTL_HFT_2022232.Endpoint", Version = "v1" });
             });
         }
 
@@ -55,7 +55,7 @@ namespace HXINTL_HFT_2022232.Endpoint
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HXINTL_HFT_2022232.Endpoint v1.0"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HXINTL_HFT_2022232.Endpoint v1"));
             }
 
             app.UseCors(x =>

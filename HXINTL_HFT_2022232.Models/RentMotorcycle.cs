@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 
-namespace I0ZMN2_HFT_2022231.Models
+namespace HXINTL_HFT_2022232.Models
 {
-    public class RentCar
+    public class RentMotorcycle
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,12 +19,12 @@ namespace I0ZMN2_HFT_2022231.Models
         public string BuyerName { get; set; }
         public int BuyDate { get; set; }
         public string BuyerGender { get; set; }
-        public bool IsFirstCar { get; set; }
+        public bool IsFirstMotorcycle { get; set; }
         [NotMapped]
         [JsonIgnore]
-        public virtual Motorcycle Car { get; set; }
-        [ForeignKey(nameof(Car))]
-        public int? Car_id { get; set; }
+        public virtual Motorcycle Motorcycle { get; set; }
+        [ForeignKey(nameof(Motorcycle))]
+        public int? Motorcycle_id { get; set; }
 
     }
 }
